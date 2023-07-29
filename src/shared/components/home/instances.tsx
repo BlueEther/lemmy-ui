@@ -142,6 +142,8 @@ export class Instances extends Component<any, InstancesState> {
               <th>{I18NextService.i18n.t("name")}</th>
               <th>{I18NextService.i18n.t("software")}</th>
               <th>{I18NextService.i18n.t("version")}</th>
+              <th>{I18NextService.i18n.t("First Seen")}</th>
+              <th>{I18NextService.i18n.t("Last Seen")}</th>
             </tr>
           </thead>
           <tbody>
@@ -154,6 +156,8 @@ export class Instances extends Component<any, InstancesState> {
                 </td>
                 <td>{i.software}</td>
                 <td>{i.version}</td>
+                <td>{i.published}</td>
+                <td>{Math.floor((Date.now()-Date.parse(i.updated))/60/60/1000+(new Date().getTimezoneOffset()/60))} Hours ago</td>
               </tr>
             ))}
           </tbody>
