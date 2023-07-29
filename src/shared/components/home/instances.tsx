@@ -132,6 +132,7 @@ export class Instances extends Component<any, InstancesState> {
       </div>
     );
   }
+
   secondsToDhms(seconds) {
     seconds = Number(seconds);
     var d = Math.floor(seconds / (3600*24));
@@ -144,6 +145,10 @@ export class Instances extends Component<any, InstancesState> {
     var mDisplay = m > 0 ? m + (m == 1 ? " minute " : " minutes ") : "";
     //var sDisplay = s > 0 ? s + (s == 1 ? " second" : " seconds") : "";
     return dDisplay + hDisplay + mDisplay;// + sDisplay;
+  }
+
+  dateStampToDate(date: Date) {
+    return date.toDateString();
   }
 
   itemList(items: Instance[]) {
@@ -169,7 +174,7 @@ export class Instances extends Component<any, InstancesState> {
                 </td>
                 <td>{i.software}</td>
                 <td>{i.version}</td>
-                <td>{i.published.toDateString()}</td>
+                <td>{this.dateStampToDate(i.published)}</td>
                 <td>{this.secondsToDhms(Math.floor((Date.now()-Date.parse(i.updated))/1000+(new Date().getTimezoneOffset()*60)))} ago</td>
               </tr>
             ))}
