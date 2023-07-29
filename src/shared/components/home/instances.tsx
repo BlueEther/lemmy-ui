@@ -169,7 +169,7 @@ export class Instances extends Component<any, InstancesState> {
                 </td>
                 <td>{i.software}</td>
                 <td>{i.version}</td>
-                <td>{i.published}</td>
+                <td>{i.published.toDateString()}</td>
                 <td>{this.secondsToDhms(Math.floor((Date.now()-Date.parse(i.updated))/1000+(new Date().getTimezoneOffset()*60)))} ago</td>
               </tr>
             ))}
