@@ -132,6 +132,19 @@ export class Instances extends Component<any, InstancesState> {
       </div>
     );
   }
+  secondsToDhms(seconds) {
+    seconds = Number(seconds);
+    var d = Math.floor(seconds / (3600*24));
+    var h = Math.floor(seconds % (3600*24) / 3600);
+    var m = Math.floor(seconds % 3600 / 60);
+    //var s = Math.floor(seconds % 60);
+    
+    var dDisplay = d > 0 ? d + (d == 1 ? " day, " : " days, ") : "";
+    var hDisplay = h > 0 ? h + (h == 1 ? " hour, " : " hours, ") : "";
+    var mDisplay = m > 0 ? m + (m == 1 ? " minute " : " minutes ") : "";
+    //var sDisplay = s > 0 ? s + (s == 1 ? " second" : " seconds") : "";
+    return dDisplay + hDisplay + mDisplay + sDisplay;
+  }
 
   itemList(items: Instance[]) {
     return items.length > 0 ? (
@@ -157,7 +170,7 @@ export class Instances extends Component<any, InstancesState> {
                 <td>{i.software}</td>
                 <td>{i.version}</td>
                 <td>{i.published}</td>
-                <td>{Math.floor((Date.now()-Date.parse(i.updated))/60/60/1000+(new Date().getTimezoneOffset()/60))} Hours ago</td>
+                <td>{this.secondsToDhms(Math.floor((Date.now()-Date.parse(i.updated))/1000+(new Date().getTimezoneOffset()*60)))} ago</td>
               </tr>
             ))}
           </tbody>
@@ -168,3 +181,4 @@ export class Instances extends Component<any, InstancesState> {
     );
   }
 }
+//<td>{Math.floor((Date.now()-Date.parse(i.updated))/60/60/1000+(new Date().getTimezoneOffset()/60))} Hours ago</td>
